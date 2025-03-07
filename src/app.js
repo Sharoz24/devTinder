@@ -1,21 +1,38 @@
 const express= require("express")
 
-const app= express()   //creating the instance 
+const app= express();   //creating the instance 
 
-app.get("/", (req, res)=>{
-    res.send("Hi from the Dashboard")
+// app.use("/user", (req,res)=>{
+//     res.send("HAHHAHAHHAHAHAH");
+// });
+
+//This will only handle the GET call to /user
+app.get("/user", (req, res)=>{
+    res.send({firstName: "Sharoz", lastName: "Khan"});
+});
+
+app.post("/user", (req, res)=>{
+    // saving data to DB
+    res.send("Data successfully saved to the database!");
+});
+
+
+app.delete("/user", (req,res)=>{
+    res.send("Deleted Successfully")
 })
 
-app.get("/ok", (req, res)=>{
-    res.send("Hello from the server44")
+app.patch("/user", (req,res)=>{
+    res.send("Patch call taken place")
 })
 
-app.get("/done", (req, res)=>{
-    res.send("Hi from the  with test")
-})
+
+//This will match all the HTTP method API calls to /test
+app.use("/test", (req, res)=>{
+    res.send("Hello from the server")
+});
 
 app.listen(7777, ()=>{
     console.log("Server listening form the port 7777...")
-})
+});
 
 
