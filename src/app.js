@@ -2,8 +2,6 @@ const express= require("express");
 
 const app= express();
 
-
-
 app.use("/", (err, req, res, next)=>{
     if(err){
          //Log on error
@@ -15,12 +13,13 @@ app.get("/getUserData", (req,res)=>{
     // try{
     //     //Logic of DB call and get user Data
     throw new Error(tcyvuio);
-    //     res.send("User Data Sent")
+    res.send("User Data Sent")
     // } catch(err){
     //     res.status(500).send("Some Error contact support team");
     // }
 });
 
+//You should
 app.use("/", (err, req, res, next)=>{
     if(err){
          //Log on error
