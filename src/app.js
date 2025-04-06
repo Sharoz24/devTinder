@@ -9,13 +9,19 @@ app.post("/signup",async (req, res)=>{
     
     // Creating a new instance of the User model
     const user= new User({
-        firstName: "Akshay",
-        lastName: "Saini",
-        emailId: "akshay@saini.com",
-        password: "akshay@123",
+        firstName: "sachin",
+        lastName: "Tendulkar",
+        emailId: "Sachin@kohli.com",
+        password: "sachin@123",
     });
-    await user.save();
-    res.send("User Added Sucessfully");
+
+    try{
+        await user.save();
+        res.send("User Added Sucessfully");
+    } catch(err){
+        res.status(400).send("Error saving the user:" + err.message);
+    }
+   
 });
 
 
