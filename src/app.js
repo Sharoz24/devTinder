@@ -7,6 +7,7 @@ const User= require("./models/user")
 
 app.use(express.json());
 
+//Post API
 app.post("/signup", async (req, res)=>{
     // // Creating a new instance of the User model
     const user= new User(req.body);
@@ -34,7 +35,7 @@ app.get("/user", async (req,res)=>{
             res.send(user)
         }
      
-        
+
         // const users= await User.find({emailId: userEmail});
         // if(users.length === 0){
         //     res.status(404).send("User not found")
@@ -59,6 +60,40 @@ app.get("/feed", async (req, res)=>{
         res.status(400).send("Something went wrong")
     }
 });
+
+// Delete a user from the database
+app.delete("/user", async(req,res)=>{
+    const userId= req.body.userId;
+    try{
+        //const user= await User.findByIdAndDelete({_id: userId}); //same as below
+        const user= await User.findByIdAndDelete(userId);
+        res.send("User deleted succesfully")
+    }
+    catch(err){
+        res.status(400).send("Something went wrong")
+    }
+});
+
+// Update data of the user
+app.patch("/user", async (req, res)=>{
+    const userId= req.body.userId;
+    const data= req.body;
+    try{
+        const user= await User.findByIdAndUpdate({_id: userId}, data, {returnDocument: "after"});
+        console.log(user)
+        res.send("User updated succesfully");
+    }
+    catch(err){
+        res.status(400).send("Something went wrong")
+    }
+})
+
+
+
+
+
+
+
 
 
 connectDB()
